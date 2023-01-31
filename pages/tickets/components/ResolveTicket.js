@@ -26,7 +26,7 @@ const ResolveTicket = ({ ticketId }) => {
 
     if (res.success) {
       onClose();
-      dispatch({ type: 'RESOLVE_TICKET', payload: res.data});
+      dispatch({ type: 'RESOLVE_TICKET', payload: res.data });
     } else {
       console.log(res);
     }

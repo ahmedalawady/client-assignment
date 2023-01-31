@@ -21,7 +21,7 @@ import { USER_ROLES, TICKETS_STATUS } from '../../utils/constants';
 
 export default function Tickets() {
   const { userAuth } = useContext(AuthContext);
-  
+
   return (
     <Layout>
       <TicketContextProvider>

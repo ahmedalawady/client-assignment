@@ -1,12 +1,12 @@
 import React, { createContext, useReducer } from 'react';
-import {ticketReducer} from '../reducers/ticketReducer';
+import { ticketReducer } from '../reducers/ticketReducer';
 
 export const TicketContext = createContext();
 
 const initialState = {
-    tickets: [],
-    loading: true,
-  };
+  tickets: [],
+  loading: true,
+};
 
 const TicketContextProvider = (props) => {
   const [tickets, dispatch] = useReducer(ticketReducer, []);
@@ -16,6 +16,6 @@ const TicketContextProvider = (props) => {
       {props.children}
     </TicketContext.Provider>
   );
-}
- 
+};
+
 export default TicketContextProvider;
