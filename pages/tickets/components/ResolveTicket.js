@@ -10,10 +10,12 @@ import {
 import { useDisclosure } from '@chakra-ui/hooks';
 import { Button } from '@chakra-ui/button';
 import { FormControl, FormLabel, Input } from '@chakra-ui/react';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import { resolveTicket } from '../../../lib/tickets';
+import { TicketContext } from '../../../contexts/TicketContext';
 
-const ResolveTicket = ({ ticketId, setIsChanged }) => {
+const ResolveTicket = ({ ticketId }) => {
+  const { dispatch } = useContext(TicketContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = useRef(null);
   const finalRef = useRef(null);
@@ -21,14 +23,10 @@ const ResolveTicket = ({ ticketId, setIsChanged }) => {
 
   const resolveTic = async () => {
     const res = await resolveTicket(ticketId, note);
-    console.log('🚀 ~ file: ResolveTicket.js:24 ~ resolveTic ~ note', note);
-    console.log(
-      '🚀 ~ file: ResolveTicket.js:24 ~ resolveTic ~ ticketId',
-      ticketId
-    );
+
     if (res.success) {
       onClose();
-      setIsChanged(true);
+      dispatch({ type: 'RESOLVE_TICKET', payload: res.data});
     } else {
       console.log(res);
     }

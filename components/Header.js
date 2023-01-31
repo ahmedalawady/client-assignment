@@ -5,7 +5,6 @@ import { getTokenFromLocalStorage } from '../lib/auth';
 
 const Header = () => {
   const { userAuth, setUserAsLoggedOut } = useContext(AuthContext);
-  console.log(userAuth);
   return (
     <Flex as="header" justifyContent="space-between" alignItems="center" p={4}>
       <Image src="/images/logo.svg" alt="Site logo" size="40px" />

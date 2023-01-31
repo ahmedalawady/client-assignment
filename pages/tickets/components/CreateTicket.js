@@ -10,10 +10,12 @@ import {
 import { useDisclosure } from '@chakra-ui/hooks';
 import { Button } from '@chakra-ui/button';
 import { FormControl, FormLabel, Input } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { createTicket } from '../../../lib/tickets';
+import { TicketContext } from '../../../contexts/TicketContext';
 
-const CreateTicket = ({ setIsChanged }) => {
+const CreateTicket = () => {
+  const { dispatch } = useContext(TicketContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [orderNumber, setOrderNumber] = useState('');
   const [reason, setReason] = useState('');
@@ -21,8 +23,8 @@ const CreateTicket = ({ setIsChanged }) => {
   const create = async () => {
     const res = await createTicket({ orderNumber, reason });
     if (res.success) {
+      dispatch({ type: 'CREATE_TICKET', payload: res.data });
       onClose();
-      setIsChanged(true);
     } else {
       console.log(res);
     }

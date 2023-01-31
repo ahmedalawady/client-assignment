@@ -8,17 +8,8 @@ export const AuthContext = createContext(initialAuthState);
 
 export function AuthContextProvider({ children }) {
   const [userAuth, setUserAuth] = useState(initialAuthState);
-  console.log(
-    '🚀 ~ file: authContext.js:13 ~ AuthContextProvider ~ userAuth',
-    userAuth
-  );
-
   useEffect(() => {
     const storedAuth = localStorage.getItem('userAuth');
-    console.log(
-      '🚀 ~ file: authContext.js:15 ~ useEffect ~ storedAuth',
-      storedAuth
-    );
 
     if (storedAuth) {
       setUserAuth({ ...JSON.parse(storedAuth) });
@@ -27,10 +18,6 @@ export function AuthContextProvider({ children }) {
 
   useEffect(() => {
     localStorage.setItem('userAuth', JSON.stringify(userAuth));
-    console.log(
-      '🚀 ~ file: authContext.js:24 ~ useEffect ~ userAuth',
-      userAuth
-    );
   }, [userAuth]);
 
   const setUserAsLoggedIn = (role) => {
